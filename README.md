@@ -13,7 +13,7 @@ This project is a **hybrid AI-powered search system** that:
 - AI-powered answer synthesis.
 - Modular Python codebase.
 
-## ⚙️ Setup
+## Setup
 
 1. Clone this repo:
 
@@ -39,7 +39,5 @@ Then enter your query and get:
 - **AI answer**
 - **Relevant local snippets**
 - **Top web results**
-
----
 
 ✨ Built with Python, AI, and curiosity.
