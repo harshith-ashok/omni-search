@@ -13,31 +13,61 @@ This project is a **hybrid AI-powered search system** that:
 - AI-powered answer synthesis.
 - Modular Python codebase.
 
+# Search engine
+
+`searching/`
+
 ## Setup
 
-1. Clone this repo:
+1. Clone repo
 
    ```bash
    git clone https://github.com/harshith-ashok/omni_search.git
-   cd omni_search
+   cd omni_search/search_engine
    ```
 
-2. Install dependencies:
+2. Install dependencies
 
    ```bash
-   pip install -r requirements.txt
+   source ./.search-env/bin/activate
+   pip3 install -r ./req.txt
    ```
 
-## Run
+3. Start FastAPI server
 
-```bash
-python main.py
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+## Usage
+
+1. Crawl URL(s)
+
+   ```bash
+   curl -X POST "http://127.0.0.1:8000/crawl" -H "Content-Type: application/json" -d '["https://example.com", "https://tailwindcss.com"]'
+   ```
+
+2. Search (Based on ranking)
+
+   - Ranking is done using `scikit-learn` with the help of TF-IDF ranking
+
+   ```bash
+   curl "http://127.0.0.1:8000/search?query=fastapi&top_k=3
+   ```
+
+## Sample Response
+
+```json
+{
+  "query": "tailwind",
+  "results": [
+    {
+      "url": "https://tailwindcss.com",
+      "score": 0.26542749569860913,
+      "snippet": "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML. v4.1 ⌘K Ctrl K Docs Blog Showcase Sponsor Plus text-4xl text-5xl text-6xl text-8xl text-gray-950 text-white tracking-tighter text-balance Rapidly build modern websites without ever leaving your HTML. text-lg text-gray-950 t"
+    }
+  ]
+}
 ```
-
-Then enter your query and get:
-
-- **AI answer**
-- **Relevant local snippets**
-- **Top web results**
 
 ✨ Built with Python, AI, and curiosity.
