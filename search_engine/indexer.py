@@ -1,35 +1,38 @@
-from typing import List, Dict
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import json
+from crawler import WebCrawler
 
 
-class TfidfIndexer:
-    def __init__(self):
-        self.documents = []      # list of texts
-        self.urls = []           # list of URLs
-        self.vectorizer = TfidfVectorizer(stop_words="english")
-        self.tfidf_matrix = None
+class Indexer:
+    def __init__(self, index_file="index.json"):
+        self.index_file = index_file
 
-    def add_document(self, url: str, text: str):
-        self.urls.append(url)
-        self.documents.append(text)
-        self.tfidf_matrix = self.vectorizer.fit_transform(self.documents)
+    def build_index(self, start_url, max_pages=10):
+        crawler = WebCrawler(max_pages=max_pages)
+        data = crawler.crawl(start_url=start_url)
 
-    def search(self, query: str, top_k: int = 5) -> List[Dict]:
-        if not self.documents:
+        try:
+            with open(self.index_file, "r") as f:
+                existing_data = json.load(f)
+        except FileNotFoundError:
+            existing_data = []
+
+        existing_data.extend(data)
+
+        with open(self.index_file, "w") as f:
+            json.dump(existing_data, f, indent=2)
+
+        return data
+
+    def search_index(self, keyword):
+        try:
+            with open(self.index_file, "r") as f:
+                data = json.load(f)
+        except FileNotFoundError:
             return []
 
-        query_vec = self.vectorizer.transform([query])
-        scores = cosine_similarity(query_vec, self.tfidf_matrix).flatten()
-
-        ranked_indices = scores.argsort()[::-1][:top_k]
         results = []
-        for idx in ranked_indices:
-            if scores[idx] > 0:  # ignore irrelevant docs
-                snippet = self.documents[idx][:300]
-                results.append({
-                    "url": self.urls[idx],
-                    "score": float(scores[idx]),
-                    "snippet": snippet
-                })
+        for entry in data:
+            if keyword.lower() in entry["title"].lower() or keyword.lower() in entry["snippet"].lower():
+                results.append(entry)
+
         return results

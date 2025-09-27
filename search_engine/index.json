@@ -1,0 +1,77 @@
+[
+  {
+    "url": "https://example.com",
+    "title": "Example Domain",
+    "snippet": "Example Domain Example Domain This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission. More information..."
+  },
+  {
+    "url": "https://www.iana.org/domains/example",
+    "title": "Example Domains",
+    "snippet": "Example Domains Domains Protocols Numbers About Example Domains As described in RFC 2606 and RFC 6761 , a number of domains such as example.com and example.org are maintained for documentation purposes. These domains may be used as illustrative examples in documents without prior coordination with us. They are not available"
+  },
+  {
+    "url": "https://www.iana.org/",
+    "title": "Internet Assigned Numbers Authority",
+    "snippet": "Internet Assigned Numbers Authority Internet Assigned Numbers Authority The global coordination of the DNS Root, IP addressing, and other Internet protocol resources is performed as the Internet Assigned Numbers Authority (IANA) functions. Learn more. Domain Names Management of the DNS Root Zone (assignments of ccTLDs and gTLDs) along with other"
+  },
+  {
+    "url": "https://www.iana.org/domains",
+    "title": "Domain Name Services",
+    "snippet": "Domain Name Services Domains Protocols Numbers About Domain Name Services We operate and maintain a number of key aspects of the DNS, including the root zone, and the .int and .arpa domains. The DNS Root Zone The root is the upper-most part of the DNS hierarchy, and involves delegating administrative"
+  },
+  {
+    "url": "https://www.iana.org/protocols",
+    "title": "Protocol Registries",
+    "snippet": "Protocol Registries Domains Protocols Numbers About Protocol Registries Protocol parameter registries represent the authoritative record of many of the codes and numbers contained in a variety of Internet protocols. We maintain these records in compliance with the associated technical standards and allocation policies, and we provide this service in coordination"
+  },
+  {
+    "url": "https://python.org",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org#content",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org#python-network",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org/",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://www.python.org/psf/",
+    "title": "Python Software Foundation",
+    "snippet": "Python Software Foundation Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org#content",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org#python-network",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://python.org/",
+    "title": "Welcome to Python.org",
+    "snippet": "Welcome to Python.org Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  },
+  {
+    "url": "https://www.python.org/psf/",
+    "title": "Python Software Foundation",
+    "snippet": "Python Software Foundation Notice: While JavaScript is not essential for this website, your interaction with the content will be limited. Please turn JavaScript on for the full experience. Skip to content \u25bc Close Python PSF Docs PyPI Jobs Community \u25b2 The Python Network Donate \u2261 Menu Search This Site GO"
+  }
+]

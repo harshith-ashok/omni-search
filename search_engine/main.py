@@ -1,32 +1,39 @@
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Query
-from typing import List
-from crawler import scrape_page
-from indexer import TfidfIndexer
+from indexer import Indexer
+from google_search import DuckDuckGoSearch
 
-app = FastAPI(title="Mini Search Engine with TF-IDF")
-indexer = TfidfIndexer()
+app = FastAPI(title="Indexed Mini Search Engine")
+gsearch = DuckDuckGoSearch()
+indexer = Indexer(index_file="index.json")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can restrict this to your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
-@app.post("/crawl")
-def crawl_and_index(urls: List[str]):
-    """
-    Crawl the given URLs and add them to the index.
-    """
-    docs = []
-    for url in urls:
-        try:
-            page = scrape_page(url)
-            indexer.add_document(page["url"], page["text"])
-            docs.append({"url": url, "status": "indexed"})
-        except Exception as e:
-            docs.append({"url": url, "error": str(e)})
-    return {"indexed": docs}
+@app.post("/index")
+def index_site(
+    start_url: str = Query(..., description="URL to start indexing"),
+    max_pages: int = Query(5, description="Max pages to crawl")
+):
+    data = indexer.build_index(start_url=start_url, max_pages=max_pages)
+    return {"indexed": len(data), "data": data}
 
 
 @app.get("/search")
-def search(query: str = Query(..., description="Search term"), top_k: int = 5):
-    """
-    Search for a term in the indexed pages using TF-IDF ranking.
-    """
-    results = indexer.search(query, top_k)
+def search_index(query: str = Query(..., description="Search term")):
+    results = indexer.search_index(query)
+    return {"query": query, "results": results}
+
+
+@app.get("/gquery")
+def google_query(
+    query: str = Query(..., description="Search term"),
+    num_results: int = Query(5, description="Number of results to fetch")
+):
+    results = gsearch.search(query, num_results=num_results)
     return {"query": query, "results": results}
