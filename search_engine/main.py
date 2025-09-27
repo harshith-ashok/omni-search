@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Query
 from typing import List
 from crawler import scrape_page
-from indexer import SimpleIndexer
+from indexer import TfidfIndexer
 
-app = FastAPI(title="Mini Search Engine")
-indexer = SimpleIndexer()
+app = FastAPI(title="Mini Search Engine with TF-IDF")
+indexer = TfidfIndexer()
 
 
 @app.post("/crawl")
@@ -24,9 +24,9 @@ def crawl_and_index(urls: List[str]):
 
 
 @app.get("/search")
-def search(query: str = Query(..., description="Search term")):
+def search(query: str = Query(..., description="Search term"), top_k: int = 5):
     """
-    Search for a term in the indexed pages.
+    Search for a term in the indexed pages using TF-IDF ranking.
     """
-    results = indexer.search(query)
+    results = indexer.search(query, top_k)
     return {"query": query, "results": results}
