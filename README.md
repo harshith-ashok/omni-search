@@ -44,7 +44,7 @@ This project is a **hybrid AI-powered search system** that:
 1. Crawl URL(s)
 
    ```bash
-   curl -X POST "http://127.0.0.1:8000/crawl" -H "Content-Type: application/json" -d '["https://example.com", "https://tailwindcss.com"]'
+   curl -X POST "http://127.0.0.1:8000/crawl" -H "Content-Type: application/json" -d '["https://harshithashok.com", "https://tailwindcss.com"]'
    ```
 
 2. Search (Based on ranking)
