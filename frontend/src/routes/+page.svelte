@@ -11,9 +11,9 @@
 </script>
 
 <main>
-	<div class="flex h-screen flex-col items-center justify-center">
+	<div class="flex h-screen flex-col items-center justify-center pb-10">
 		<div
-			class="text-[6vh] font-black tracking-wide uppercase transition-all hover:scale-105"
+			class="text-[3vh] font-black tracking-wide uppercase transition-all hover:scale-105 md:text-[6vh]"
 			style="font-family: LT Avocado"
 		>
 			<a href="/">Omni Search</a>
@@ -33,7 +33,7 @@
 				type="text"
 				bind:value={queryValue}
 				autofocus
-				class="input w-128 rounded-l-full border-1 p-4 pl-10"
+				class="input w-64 rounded-l-full border-1 p-4 pl-10 md:w-128"
 			/>
 			<button
 				class="cursor-pointer border-y-1 p-4 px-4 text-black transition-all hover:border-black hover:bg-black hover:text-white"

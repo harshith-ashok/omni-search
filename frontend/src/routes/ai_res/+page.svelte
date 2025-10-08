@@ -1,38 +1,45 @@
 <script lang="ts">
+	import { query } from '$app/server';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import duckduck from '$lib/assets/duck_duck.svg';
-	let queryValue = '';
-	let query = '';
-	let results: any = null;
-	let loading = false;
+
+	let AIqueryValue = '';
+	let AIquery = '';
+	let AIresults: any = null;
+	let AIloading = false;
 
 	async function fetchResults(q: string) {
-		loading = true;
+		AIloading = true;
 		try {
-			const res = await fetch(
-				`http://127.0.0.1:8000/gquery?query=${encodeURIComponent(q)}&num_results=5`
-			);
-			results = await res.json();
-			console.log(results);
+			const res = await fetch('http://127.0.0.1:5000/chat', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					session_id: 'user123',
+					message: `${q}`
+				})
+			});
+			AIresults = await res.json();
+			console.log(AIresults);
 		} catch (e) {
-			results = { error: 'Failed to fetch results' };
+			AIresults = { error: 'Failed to fetch results' };
 		}
-		loading = false;
+		AIloading = false;
 	}
 
 	onMount(() => {
 		const urlQuery = $page.url.searchParams.get('query') || '';
-		query = urlQuery;
-		queryValue = urlQuery;
-		if (query) fetchResults(query);
+		AIquery = urlQuery;
+		AIqueryValue = urlQuery;
+		if (AIquery) fetchResults(AIquery);
 	});
 
-	function search(q: string) {
-		goto(`/results?query=${encodeURIComponent(q)}`);
-		// fetchResults will be triggered by onMount after navigation
-	}
+	// function search(q: string) {
+	// 	goto(`/results?query=${encodeURIComponent(q)}`);
+	// 	// fetchResults will be triggered by onMount after navigation
+	// }
 </script>
 
 <main>
@@ -41,35 +48,35 @@
 			class="flex-1 text-[3vh] font-black tracking-wide uppercase transition-all hover:scale-105"
 			style="font-family: LT Avocado"
 		>
-			<a href="/">Omni Search </a>
+			<a href="/">Omni Search</a>
 		</div>
 
 		<div class="flex flex-6 gap-0">
 			<input
 				type="text"
-				bind:value={queryValue}
+				bind:value={AIqueryValue}
 				placeholder="Search"
 				class="input w-full rounded-l-full border-1 p-4 pl-10"
 			/>
-			<a
+			<button
 				class="cursor-pointer rounded-r-full bg-black p-4 px-10 text-white hover:bg-gray-900"
 				style="font-family: LT Avocado"
 				type="button"
-				href="/gresults?query={encodeURIComponent(queryValue)}&num_results=5"
+				on:click={() => fetchResults(AIqueryValue)}
 			>
 				SEARCH
-			</a>
+			</button>
 		</div>
 	</div>
 	<div class="w-[75%]">
-		{#if loading}
+		{#if AIloading}
 			<div class="mt-10 text-lg">Loading...</div>
-		{:else if results}
+		{:else if AIresults}
 			<div class="mt-10 flex flex-col gap-6 p-10">
-				{#if results.error}
-					<div class="text-red-600">{results.error}</div>
-				{:else if results.results}
-					{#each results.results as result}
+				{#if AIresults.error}
+					<div class="text-red-600">{AIresults.error}</div>
+				{:else if AIresults.results}
+					{#each AIresults.results as result}
 						<div class=" flex flex-col bg-white p-6">
 							<a class="mb-2 text-2xl font-bold" href={result.url}>
 								{result.title}
@@ -84,7 +91,7 @@
 					{/each}
 				{:else}
 					<div class="rounded-lg border bg-white p-6 shadow">
-						<pre>{JSON.stringify(results, null, 2)}</pre>
+						<pre>{JSON.stringify(AIresults, null, 2)}</pre>
 					</div>
 				{/if}
 			</div>

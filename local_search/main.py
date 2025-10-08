@@ -1,8 +1,6 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from google_search import DuckDuckGoSearch
-from indexer import Indexer
 from llm import BaymaxChat
 import os
 
@@ -11,10 +9,6 @@ HOME = '/Users/harshith/'
 
 app = FastAPI(title="Baymax Chatbot")
 baymax = BaymaxChat()
-
-gsearch = DuckDuckGoSearch()
-indexer = Indexer(index_file="index.json")
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -91,42 +85,3 @@ curl -X POST "http://127.0.0.1:8000/chat" \
 def chat(request: ChatRequest):
     reply = baymax.chat(request.message, session_id=request.session_id)
     return {"reply": reply}
-
-
-'''
-curl -X POST "http://127.0.0.1:8000/index?start_url=https://harshithashok.com&max_pages=3"
-'''
-
-
-@app.post("/index")
-def index_site(
-    start_url: str = Query(..., description="URL to start indexing"),
-    max_pages: int = Query(5, description="Max pages to crawl")
-):
-    data = indexer.build_index(start_url=start_url, max_pages=max_pages)
-    return {"indexed": len(data), "data": data}
-
-
-'''
-curl "http://127.0.0.1:8000/search?query='hello'"
-'''
-
-
-@app.get("/search")
-def search_index(query: str = Query(..., description="Search term")):
-    results = indexer.search_index(query)
-    return {"query": query, "results": results}
-
-
-'''
-curl "http://127.0.0.1:8000/gquery?query='hello'&num_results=5"
-'''
-
-
-@app.get("/gquery")
-def google_query(
-    query: str = Query(..., description="Search term"),
-    num_results: int = Query(5, description="Number of results to fetch")
-):
-    results = gsearch.search(query, num_results=num_results)
-    return {"query": query, "results": results}
